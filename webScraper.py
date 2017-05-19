@@ -18,15 +18,17 @@ def getSJSUProfessorList():
     return profList
 
 def findOnRMP():
-    profUrl = "http://www.ratemyprofessors.com/search.jsp?query="+ professor.replace(" ","+", 1)
+
     ratemyprof = requests.get(profUrl)
     profTree = html.fromstring(ratemyprof.content)
     schools = profTree.xpath(('//span[@class = "sub"]/text()'))
     return schools
 
-professorList = getSJSUProfessorList()
+
+professorsList = getSJSUProfessorList()
 for professor in professorsList:
-    #print professor
+    print professor
+    profUrl = "http://www.ratemyprofessors.com/search.jsp?query="+ professor.replace(" ","+", 1)
     schools = findOnRMP()
     index = 0
     found = False
